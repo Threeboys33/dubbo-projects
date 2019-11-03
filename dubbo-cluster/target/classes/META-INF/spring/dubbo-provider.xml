@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+<dubbo:application name="dubbo-provier" owner="threeboys33" logger="log4j"/>
+
+<!--&lt;!&ndash;    多注册中心 &ndash;&gt;-->
+<!--<dubbo:protocol name="dubbo" port="20880"/>-->
+<!--<dubbo:protocol name="hessian" port="8090" server="jetty"/>-->
+
+<!--    主机绑定 发布服务到指定的主机上去，主要用于区分测试环境，生产环境 -->
+<!--    <dubbo:protocol name="dubbo" port="20880" host="172.20.10.9"/>-->
+
+<!--    多主机访问负载均衡策略，此处采用端口模拟-->
+    <dubbo:protocol name="dubbo" port="20881" host="172.20.10.9"/>
+
+<!--    注册中心可通过直连方式点对点 -->
+<!--<dubbo:registry address="N/A"/>-->
+<!--注册中心可通过zookeeper建立连接-->
+<!--    <dubbo:registry address="zookeeper://127.0.0.1:2181" />-->
+
+<!--    只订阅不注册，开发阶段依赖其他服务，需要去注册中心拉去其他服务，但自身的服务不会提供注册 ls /dubbo/dtstack.san.IHelloService/providers信息为空-->
+<!--    <dubbo:registry address="zookeeper://127.0.0.1:2181" register="false"/>-->
+
+
+<!--    只注册不订阅，迁移阶段，有两个注册中心，一个注册中心提供注册和订阅，用于正常业务执行，另一个注册中心只提供注册-->
+<!--    <dubbo:registry address="zookeeper://127.0.0.1:2181" subscribe="false"/>-->
+
+<!--    负载均衡
+        1、random 默认方式
+        2、roundRobin 轮询方式，如果某台机子性能较差，会导致请求堆积问题
+        3、LeastActive 会根据自己响应状态选取合适的机子
+        4、consistenthash 相同参数的请求总是发到同一提供者,当一台服务挂掉的时候，本身的服务会被均摊到其他节点上去
+-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" subscribe="false"/>
+
+<!--   多协议中心可以通过protocol指定协议方式，多种协议方式逗号分割；多版本可通过version来实现不同的接口-->
+<!--   异步调用通过设置参数async=true方式实现-->
+<dubbo:service interface="dtstack.san.IHelloService" ref="echoService" version="1.0.0" protocol="dubbo" />
+<!--<dubbo:service interface="dtstack.san.IHelloService" ref="helloService" version="2.0.0" protocol="hessian"/>-->
+
+
+<bean id="echoService" class="dtstack.san.impl.EchoSErviceImp"/>
+<bean id="helloService" class="dtstack.san.impl.HelloServiceImpl"/>
+
+</beans>

@@ -21,6 +21,6 @@ public class EchoSErviceImp implements IHelloService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return new ResponseObject().setCode(200).setMsg("EchoHello Service invoke success").setData(requestObject);
+        return new ResponseObject().setCode(200).setMsg("CLuster2 EchoHello Service invoke success").setData(requestObject);
     }
 }
