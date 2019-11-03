@@ -7,7 +7,7 @@
 
 <dubbo:application name="dubbo-user"/>
 
-    <dubbo:protocol name="dubbo" />
+    <dubbo:protocol name="dubbo" port="20880" />
     <dubbo:protocol name="hessian"/>
 
 <!--    注册中心N/A可通过点对点url方式直连-->
@@ -23,10 +23,23 @@
 <!--                     protocol="dubbo"-->
 <!--                     url="dubbo://172.20.10.9:20880/dtstack.san.IHelloService"/>-->
 
+<!--异步调用IOThread方式回掉方式调用方式，异步调用协议方式不支持hessian方式 -->
+<!--    <dubbo:reference id = "helloService"-->
+<!--                     interface="dtstack.san.IHelloService"-->
+<!--                     version="1.0.0"-->
+<!--                     protocol="dubbo" check="false" async="true"/>-->
+
+<!-- 参数timeout超时时间设置 异常报错Waiting server-side response timeout by scan timer-->
+<!--    <dubbo:reference id = "helloService"-->
+<!--                     interface="dtstack.san.IHelloService"-->
+<!--                     version="1.0.0"-->
+<!--                     protocol="dubbo" check="false" async="true" timeout="3000"/>-->
+
 
     <dubbo:reference id = "helloService"
                      interface="dtstack.san.IHelloService"
                      version="1.0.0"
-                     protocol="hessian" check="false"/>
+                     protocol="dubbo" check="false" async="true" timeout="5000"/>
+
 
 </beans>

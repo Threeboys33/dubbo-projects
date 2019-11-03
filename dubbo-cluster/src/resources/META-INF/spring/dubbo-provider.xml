@@ -12,7 +12,10 @@
 <!--<dubbo:protocol name="hessian" port="8090" server="jetty"/>-->
 
 <!--    主机绑定 发布服务到指定的主机上去，主要用于区分测试环境，生产环境 -->
-    <dubbo:protocol name="dubbo" port="20880" host="172.20.10.9"/>
+<!--    <dubbo:protocol name="dubbo" port="20880" host="172.20.10.9"/>-->
+
+<!--    多主机访问负载均衡策略，此处采用端口模拟-->
+    <dubbo:protocol name="dubbo" port="20881" host="172.20.10.9"/>
 
 <!--    注册中心可通过直连方式点对点 -->
 <!--<dubbo:registry address="N/A"/>-->

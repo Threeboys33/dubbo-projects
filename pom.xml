@@ -12,6 +12,7 @@
     <module>dubbo-user</module>
     <module>dubbo-provider</module>
       <module>dubbo-user-api</module>
+    <module>dubbo-cluster</module>
   </modules>
 
   <name>dubbo-projects</name>
