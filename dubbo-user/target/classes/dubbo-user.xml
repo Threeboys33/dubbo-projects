@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+<dubbo:application name="dubbo-user"/>
+
+    <dubbo:protocol name="dubbo" />
+    <dubbo:protocol name="hessian"/>
+
+<!--    注册中心N/A可通过点对点url方式直连-->
+<!--    <dubbo:registry address="N/A"/>-->
+
+        <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+
+<!--    同一个接口不同实现版本-->
+<!--    <dubbo:reference id = "helloService"-->
+<!--                     interface="dtstack.san.IHelloService"-->
+<!--                     version="2.0.0"-->
+<!--                     protocol="dubbo"-->
+<!--                     url="dubbo://172.20.10.9:20880/dtstack.san.IHelloService"/>-->
+
+    <dubbo:reference id = "helloService"
+                     interface="dtstack.san.IHelloService"
+                     version="1.0.0"
+                     protocol="hessian"/>
+
+</beans>
