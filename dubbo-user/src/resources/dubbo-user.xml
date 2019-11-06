@@ -71,13 +71,13 @@
 <!--                     cluster="failsafe"-->
 <!--    />-->
 
-<!--    服务降级于异步方法调用冲突-->
+<!--    服务降级，异步方法调用冲突，与容错机制failfast不显示错误为null-->
     <dubbo:reference id = "helloService"
                      interface="dtstack.san.IHelloService"
                      protocol="dubbo"
                      version="1.0.0"
-
-                     timeout="5"
+                     cluster="failover"
+                     timeout="3"
                      mock="dtstack.san.mock.MockTestImpl"
     />
 
