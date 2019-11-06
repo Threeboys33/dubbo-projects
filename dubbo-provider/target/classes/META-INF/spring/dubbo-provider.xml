@@ -12,7 +12,9 @@
 <!--<dubbo:protocol name="hessian" port="8090" server="jetty"/>-->
 
 <!--    主机绑定 发布服务到指定的主机上去，主要用于区分测试环境，生产环境 -->
-    <dubbo:protocol name="dubbo" port="20880" host="172.20.10.9"/>
+<!--    <dubbo:protocol name="dubbo" port="20880" host="172.20.10.9"/>-->
+
+    <dubbo:protocol name="dubbo" port="20880"/>
 
 <!--    注册中心可通过直连方式点对点 -->
 <!--<dubbo:registry address="N/A"/>-->
@@ -32,7 +34,8 @@
         3、LeastActive 会根据自己响应状态选取合适的机子
         4、consistenthash 相同参数的请求总是发到同一提供者,当一台服务挂掉的时候，本身的服务会被均摊到其他节点上去
 -->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" subscribe="false"/>
+
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
 <!--   多协议中心可以通过protocol指定协议方式，多种协议方式逗号分割；多版本可通过version来实现不同的接口-->
 <!--   异步调用通过设置参数async=true方式实现-->

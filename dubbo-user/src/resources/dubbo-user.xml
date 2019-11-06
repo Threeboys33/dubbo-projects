@@ -35,17 +35,50 @@
 <!--                     version="1.0.0"-->
 <!--                     protocol="dubbo" check="false" async="true" timeout="3000"/>-->
 
+<!--    负载均衡-->
 <!--    leastactive
         consistenthash
         random
         roundrobin-->
+<!--    <dubbo:reference id = "helloService"-->
+<!--                     interface="dtstack.san.IHelloService"-->
+<!--                     version="1.0.0"-->
+<!--                     protocol="dubbo"-->
+<!--                     check="false"-->
+<!--                     async="true"-->
+<!--                     timeout="5000"-->
+<!--                     loadbalance="leastactive"-->
+<!--                     cluster="failsafe"-->
+<!--    />-->
+
+
+<!--    集群容错-->
+<!--    1、failsafe 吞掉错误-->
+<!--    2、failover 重试次数try2，不包含第一次-->
+<!--    3、failfast 快速失败，失败后立马报错-->
+<!--    4、failback 失败后自动恢复-->
+<!--    5、forking forks设置并行的最大数、 并行调用-->
+<!--    6、broadcast 广播任意一台报错，则执行的方法错误-->
+<!--    -->
+<!--    <dubbo:reference id = "helloService"-->
+<!--                     interface="dtstack.san.IHelloService"-->
+<!--                     version="1.0.0"-->
+<!--                     protocol="dubbo"-->
+<!--                     check="false"-->
+<!--                     async="true"-->
+<!--                     timeout="5000"-->
+<!--                     loadbalance="leastactive"-->
+<!--                     cluster="failsafe"-->
+<!--    />-->
+
+<!--    服务降级-->
     <dubbo:reference id = "helloService"
                      interface="dtstack.san.IHelloService"
                      version="1.0.0"
                      protocol="dubbo"
                      check="false"
-                     async="true"
-                     timeout="5000" loadbalance="leastactive"/>
-
+                     timeout="1"
+                     mock="dtstack.san.MockTestImpl"
+    />
 
 </beans>

@@ -14,7 +14,8 @@ public class App {
         IHelloService iHelloService = null;
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("dubbo-user.xml");
         iHelloService = (IHelloService) context.getBean("helloService");
-//        ResponseObject responseObject = iHelloService.sayHello(new RequestObject().setID("1"));
+        ResponseObject responseObject = iHelloService.sayHello(new RequestObject().setID("1"));
+        System.err.println(responseObject);
 
 //        异步调用
 //        iHelloService.sayHello(new RequestObject().setID("1"));
@@ -24,14 +25,13 @@ public class App {
 //        System.err.println(responseObject);
 
 //        负载均衡
-
-        for (int i = 0; i < 10; i++) {
-
-            iHelloService.sayHello(new RequestObject().setID("1111"));
-            Future<ResponseObject> future = RpcContext.getContext().getFuture();
-            ResponseObject responseObject = future.get();
-            System.err.println(responseObject);
-
-        }
+//        for (int i = 0; i < 10; i++) {
+//
+//            iHelloService.sayHello(new RequestObject().setID("1111"));
+//            Future<ResponseObject> future = RpcContext.getContext().getFuture();
+//            ResponseObject responseObject = future.get();
+//            System.err.println(responseObject);
+//
+//        }
     }
 }
