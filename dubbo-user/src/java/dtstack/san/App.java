@@ -9,7 +9,7 @@ import java.util.concurrent.Future;
 /**
  * Hello world!
  */
-public class App {
+public class App{
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         IHelloService iHelloService = null;
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("dubbo-user.xml");
