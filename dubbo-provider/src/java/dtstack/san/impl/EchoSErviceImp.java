@@ -15,11 +15,11 @@ import java.util.concurrent.TimeUnit;
 public class EchoSErviceImp implements IHelloService {
     @Override
     public ResponseObject sayHello(RequestObject requestObject) {
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     TimeUnit.SECONDS.sleep(1);
+        // } catch (InterruptedException e) {
+        //     e.printStackTrace();
+        // }
         return new ResponseObject().setCode(200).setMsg("Cluster1 EchoHello  Service invoke success").setData(requestObject);
     }
 }

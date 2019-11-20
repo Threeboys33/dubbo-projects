@@ -1,0 +1,27 @@
+package dtstack.san;
+
+/**
+ * <p>
+ *
+ * @author 33
+ * @version 1.0.0
+ */
+
+import com.alibaba.dubbo.common.extension.ExtensionLoader;
+
+public class Cluster$Adpative implements com.alibaba.dubbo.rpc.cluster.Cluster {
+    public com.alibaba.dubbo.rpc.Invoker join(com.alibaba.dubbo.rpc.cluster.Directory arg0) {
+        if (arg0 == null)
+            throw new IllegalArgumentException("com.alibaba.dubbo.rpc.cluster.Directory argument == null");
+        if (arg0.getUrl() == null)
+            throw new IllegalArgumentException("com.alibaba.dubbo.rpc.cluster.Directory argument getUrl() == null");
+        //根据配置来得到默认是failover值
+        com.alibaba.dubbo.common.URL url = arg0.getUrl();
+        String extName = url.getParameter("cluster", "failover");
+        //MockClusterWrapper(FailoverCluster)这里面有一个wrap
+        if (extName == null)
+            throw new IllegalStateException("Fail to get extension(com.alibaba.dubbo.rpc.cluster.Cluster) name from url(" + url.toString() + ") use keys([cluster])");
+        com.alibaba.dubbo.rpc.cluster.Cluster extension = (com.alibaba.dubbo.rpc.cluster.Cluster) ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.rpc.cluster.Cluster.class).getExtension(extName);
+        return extension.join(arg0);
+    }
+}
